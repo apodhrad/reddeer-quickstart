@@ -18,6 +18,7 @@
     <tycho.test.jvmArgs>-Xmx512m -XX:MaxPermSize=256m</tycho.test.jvmArgs>
     <surefire.timeout>1200</surefire.timeout>
     <platformSystemProperties></platformSystemProperties>
+    <jbtis.tp.version>4.2.0.Beta1b</jbtis.tp.version>
   </properties>
 
   <repositories>
@@ -30,6 +31,11 @@
       <id>RedDeer</id>
       <layout>p2</layout>
       <url>http://download.jboss.org/jbosstools/updates/stable/luna/core/reddeer/0.6.0</url>
+    </repository>
+    <repository>
+      <id>JBTIS</id>
+      <layout>p2</layout>
+      <url>http://download.jboss.org/jbosstools/updates/development/luna/integration-stack/aggregate/4.2.0.Beta1</url>
     </repository>
   </repositories>
 
@@ -84,8 +90,51 @@
               <include>**/*Test.class</include>
               <include>**/*Tests.class</include>
             </includes>
+	    <dependencies combine.children="append">
+	      <!-- SwitchYard feature -->
+	      <dependency>
+		<type>p2-installable-unit</type>
+		<artifactId>org.switchyard.tools.feature.feature.group</artifactId>
+		<version>2.0.0</version>
+	      </dependency>
+	      <!-- SwitchYard BPEL feature -->
+	      <dependency>
+		<type>p2-installable-unit</type>
+		<artifactId>org.switchyard.tools.bpel.feature.feature.group</artifactId>
+		<version>2.0.0</version>
+	      </dependency>
+	      <!-- SwitchYard BPMN2 feature -->
+	      <dependency>
+		<type>p2-installable-unit</type>
+		<artifactId>org.switchyard.tools.bpmn2.feature.feature.group</artifactId>
+		<version>2.0.0</version>
+	      </dependency>
+	      <!-- This entry should enable creating of default JDK on Mac -->
+	      <dependency>
+		<type>p2-installable-unit</type>
+		<artifactId>org.eclipse.jdt.feature.group</artifactId>
+		<version>0.0.0</version>
+	      </dependency>
+	    </dependencies>
           </configuration>
         </plugin>
+	    <!-- JBTIS Target Platform -->
+	    <plugin>
+	      <groupId>org.eclipse.tycho</groupId>
+	      <artifactId>target-platform-configuration</artifactId>
+	      <version>${tycho.version}</version>
+	      <configuration>
+		<target>
+		  <artifact>
+		    <groupId>org.jboss.tools.integration-stack</groupId>
+		    <artifactId>target-platform</artifactId>
+		    <version>${jbtis.tp.version}</version>
+		    <type>target</type>
+		    <classifier>base</classifier>
+		  </artifact>
+		</target>
+	      </configuration>
+	    </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
