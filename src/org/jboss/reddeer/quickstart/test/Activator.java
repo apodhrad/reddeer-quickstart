@@ -1,4 +1,4 @@
-package org.jboss.reddeer.reddeer.test;
+package org.jboss.reddeer.quickstart.test;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

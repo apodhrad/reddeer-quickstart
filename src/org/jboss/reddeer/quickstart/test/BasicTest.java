@@ -1,4 +1,4 @@
-package org.jboss.reddeer.reddeer.test;
+package org.jboss.reddeer.quickstart.test;
 
 import org.jboss.reddeer.junit.runner.RedDeerSuite;
 import org.jboss.reddeer.swt.condition.ShellWithTextIsAvailable;
